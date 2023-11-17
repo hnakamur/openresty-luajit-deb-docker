@@ -1,0 +1,5 @@
+luajit (2.1.20231117-1hn1DebRelDistrib) DebRelCodename; urgency=medium
+
+  * Initial release
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 18 Nov 2023 02:02:52 +0900

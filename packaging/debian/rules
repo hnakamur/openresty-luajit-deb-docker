@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+ABIM:=$(shell grep MAJVER Makefile|cut -d = -f 2|tr -d ' ')
+ABIN:=$(shell grep MINVER Makefile|cut -d = -f 2|tr -d ' ')
+ABIO:=$(shell grep RELVER Makefile|cut -d = -f 2|tr -d ' ')
+ABI=$(ABIM).$(ABIN).$(ABIO)
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	make amalg SHELL='sh -x' PREFIX=/usr CC=gcc MULTILIB=lib/$(DEB_HOST_MULTIARCH)
+
+override_dh_auto_install:
+	make install PREFIX=/usr DESTDIR=$$PWD/debian/tmp/ MULTILIB=lib/$(DEB_HOST_MULTIARCH) LDCONFIG="/sbin/ldconfig -n"
+	sed -i 's?^multilib=.*?multilib=lib/$(DEB_HOST_MULTIARCH)?' \
+		debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig/*.pc
