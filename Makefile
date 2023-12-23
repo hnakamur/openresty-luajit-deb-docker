@@ -26,7 +26,7 @@ run-ubuntu2204:
 
 # Debian 12
 deb-debian12: build-debian12
-	docker run --rm -v ./dist-debian12:/dist luajit-ubuntu2204 bash -c \
+	docker run --rm -v ./dist-debian12:/dist luajit-debian12 bash -c \
 	"install /src/*${PKG_VERSION}* /dist/"
 	tar zcf dist-debian12.tar.gz ./dist-debian12/
 
