@@ -44,6 +44,26 @@ build-debian12:
 run-debian12:
 	docker run --rm -it luajit-debian12 bash
 
+# Ubuntu 18.04
+deb-ubuntu1804: build-ubuntu1804
+	docker run --rm -v ./dist-ubuntu1804:/dist luajit-ubuntu1804 bash -c \
+	"install /src/*${PKG_VERSION}* /dist/"
+	tar zcf dist-ubuntu1804.tar.gz ./dist-ubuntu1804/
+
+build-ubuntu1804:
+	sudo mkdir -p dist-ubuntu1804
+	PKG_REL_DISTRIB=ubuntu18.04; \
+	(set -x; BUILDKIT_PROGRESS=plain docker build ${DOCKER_NO_CACHE} \
+	    --build-arg FROM=ubuntu:18.04 \
+		--build-arg PKG_VERSION=${PKG_VERSION} \
+		--build-arg PKG_REL_DISTRIB=ubuntu18.04 \
+		-t luajit-ubuntu1804 . \
+	) 2>&1 | sudo tee dist-ubuntu1804/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
+	sudo xz --best --force dist-ubuntu1804/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
+
+run-ubuntu1804:
+	docker run --rm -it luajit-ubuntu1804 bash
+
 exec:
 	docker exec -it $$(docker ps -q) bash
 

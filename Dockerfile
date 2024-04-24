@@ -22,7 +22,7 @@ COPY --chown=${BUILD_USER}:${BUILD_USER} ./luajit /src/luajit/
 USER ${BUILD_USER}
 WORKDIR ${SRC_DIR}
 ARG PKG_VERSION
-RUN tar cf - --exclude=.git luajit | xz -c --best > luajit_${PKG_VERSION}.orig.tar.xz
+RUN tar cf - luajit | xz -c --best > luajit_${PKG_VERSION}.orig.tar.xz
 
 COPY --chown=${BUILD_USER}:${BUILD_USER} ./debian /src/luajit/debian/
 WORKDIR ${SRC_DIR}/luajit
