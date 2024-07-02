@@ -1,3 +1,9 @@
+luajit (2.1.20240626-1hn1DebRelDistrib) DebRelCodename; urgency=medium
+
+  * Upstream v2.1-20240626
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Tue, 02 Jul 2024 20:24:34 +0900
+
 luajit (2.1.20240314-1hn1DebRelDistrib) DebRelCodename; urgency=medium
 
   * Upstream v2.1-20240314
