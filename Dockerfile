@@ -27,7 +27,7 @@ RUN tar cf - --exclude=.git luajit | xz -c --best > luajit_${PKG_VERSION}.orig.t
 COPY --chown=${BUILD_USER}:${BUILD_USER} ./debian /src/luajit/debian/
 WORKDIR ${SRC_DIR}/luajit
 ARG PKG_REL_DISTRIB
-RUN sed -i "s/DebRelDistrib/${PKG_REL_DISTRIB}/;s/DebRelCodename/$(lsb_release -cs)/" /src/luajit/debian/changelog
+RUN sed -i "s/DebRelDistrib/${PKG_REL_DISTRIB}/;s/UNRELEASED/$(lsb_release -cs)/" /src/luajit/debian/changelog
 RUN dpkg-buildpackage -us -uc
 
 USER root

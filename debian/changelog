@@ -1,16 +1,22 @@
-luajit (2.1.20240626-1hn1DebRelDistrib) DebRelCodename; urgency=medium
+luajit (2.1.20240815-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Upstream v2.1-20240815
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Thu, 15 Aug 2024 14:57:28 +0900
+
+luajit (2.1.20240626-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Upstream v2.1-20240626
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Tue, 02 Jul 2024 20:24:34 +0900
 
-luajit (2.1.20240314-1hn1DebRelDistrib) DebRelCodename; urgency=medium
+luajit (2.1.20240314-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Upstream v2.1-20240314
 
  -- Hiroaki Nakamura <hnakamur@gmail.com>  Wed, 17 Apr 2024 22:40:29 +0900
 
-luajit (2.1.20231117-1hn1DebRelDistrib) DebRelCodename; urgency=medium
+luajit (2.1.20231117-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Initial release
 
