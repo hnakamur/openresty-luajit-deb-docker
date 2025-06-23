@@ -1,3 +1,9 @@
+luajit (2.1.20250529-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Upstream v2.1-20250529
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Mon, 23 Jun 2025 09:33:32 +0900
+
 luajit (2.1.20250117-1hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Upstream v2.1-20250117
