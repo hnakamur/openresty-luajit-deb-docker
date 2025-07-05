@@ -14,8 +14,9 @@ deb-ubuntu2404: build-ubuntu2404
 build-ubuntu2404:
 	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04
 	PKG_REL_DISTRIB=ubuntu24.04; \
-	(set -x; BUILDKIT_PROGRESS=plain docker build ${DOCKER_NO_CACHE} \
-	    --build-arg FROM=ubuntu:24.04 \
+	(set -x; \
+	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
+		--build-arg FROM=ubuntu:24.04 \
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg PKG_REL_DISTRIB=ubuntu24.04 \
 		-t luajit-ubuntu2404 . \
@@ -34,8 +35,9 @@ deb-ubuntu2204: build-ubuntu2204
 build-ubuntu2204:
 	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04
 	PKG_REL_DISTRIB=ubuntu22.04; \
-	(set -x; BUILDKIT_PROGRESS=plain docker build ${DOCKER_NO_CACHE} \
-	    --build-arg FROM=ubuntu:22.04 \
+	(set -x; \
+	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
+		--build-arg FROM=ubuntu:22.04 \
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg PKG_REL_DISTRIB=ubuntu22.04 \
 		-t luajit-ubuntu2204 . \
@@ -54,8 +56,9 @@ deb-debian12: build-debian12
 build-debian12:
 	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12
 	PKG_REL_DISTRIB=debian12; \
-	(set -x; BUILDKIT_PROGRESS=plain docker build ${DOCKER_NO_CACHE} \
-	    --build-arg FROM=debian:12 \
+	(set -x; \
+	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
+		--build-arg FROM=debian:12 \
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg PKG_REL_DISTRIB=debian12 \
 		-t luajit-debian12 . \
