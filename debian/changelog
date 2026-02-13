@@ -1,3 +1,9 @@
+luajit (2.1.20260114-1hn1DebRelDistrib) UNRELEASED; urgency=medium
+
+  * Upstream v2.1-20260114
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Fri, 13 Feb 2026 09:53:37 +0900
+
 luajit (2.1.20251030-2hn1DebRelDistrib) UNRELEASED; urgency=medium
 
   * Fix deb version
