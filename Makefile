@@ -5,6 +5,27 @@ ifdef NO_CACHE
 DOCKER_NO_CACHE=--no-cache
 endif
 
+# Ubuntu 25.10
+deb-ubuntu2510: build-ubuntu2510
+	docker run --rm -v ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10:/dist luajit-ubuntu2510 bash -c \
+	"install /src/*${PKG_VERSION}* /dist/"
+	tar zcf ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10.tar.gz ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/
+
+build-ubuntu2510:
+	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10
+	PKG_REL_DISTRIB=ubuntu25.10; \
+	(set -x; \
+	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
+		--build-arg FROM=ubuntu:25.10 \
+		--build-arg PKG_VERSION=${PKG_VERSION} \
+		--build-arg PKG_REL_DISTRIB=ubuntu25.10 \
+		-t luajit-ubuntu2510 . \
+	) 2>&1 | sudo tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
+	sudo xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
+
+run-ubuntu2510:
+	docker run --rm -it luajit-ubuntu2510 bash
+
 # Ubuntu 24.04
 deb-ubuntu2404: build-ubuntu2404
 	docker run --rm -v ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04:/dist luajit-ubuntu2404 bash -c \
