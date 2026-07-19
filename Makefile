@@ -12,7 +12,7 @@ deb-ubuntu2604: build-ubuntu2604
 	tar zcf ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04.tar.gz ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/
 
 build-ubuntu2604:
-	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04
+	mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04
 	PKG_REL_DISTRIB=ubuntu26.04; \
 	(set -x; \
 	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
@@ -20,32 +20,11 @@ build-ubuntu2604:
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg PKG_REL_DISTRIB=ubuntu26.04 \
 		-t luajit-ubuntu2604 . \
-	) 2>&1 | sudo tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
-	sudo xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
+	) 2>&1 | tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
+	xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu26.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
 
 run-ubuntu2604:
 	docker run --rm -it luajit-ubuntu2604 bash
-
-# Ubuntu 25.10
-deb-ubuntu2510: build-ubuntu2510
-	docker run --rm -v ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10:/dist luajit-ubuntu2510 bash -c \
-	"install /src/*${PKG_VERSION}* /dist/"
-	tar zcf ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10.tar.gz ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/
-
-build-ubuntu2510:
-	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10
-	PKG_REL_DISTRIB=ubuntu25.10; \
-	(set -x; \
-	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
-		--build-arg FROM=ubuntu:25.10 \
-		--build-arg PKG_VERSION=${PKG_VERSION} \
-		--build-arg PKG_REL_DISTRIB=ubuntu25.10 \
-		-t luajit-ubuntu2510 . \
-	) 2>&1 | sudo tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
-	sudo xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu25.10/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
-
-run-ubuntu2510:
-	docker run --rm -it luajit-ubuntu2510 bash
 
 # Ubuntu 24.04
 deb-ubuntu2404: build-ubuntu2404
@@ -54,7 +33,7 @@ deb-ubuntu2404: build-ubuntu2404
 	tar zcf ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04.tar.gz ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/
 
 build-ubuntu2404:
-	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04
+	mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04
 	PKG_REL_DISTRIB=ubuntu24.04; \
 	(set -x; \
 	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
@@ -62,8 +41,8 @@ build-ubuntu2404:
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg PKG_REL_DISTRIB=ubuntu24.04 \
 		-t luajit-ubuntu2404 . \
-	) 2>&1 | sudo tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
-	sudo xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
+	) 2>&1 | tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
+	xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu24.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
 
 run-ubuntu2404:
 	docker run --rm -it luajit-ubuntu2404 bash
@@ -75,7 +54,7 @@ deb-ubuntu2204: build-ubuntu2204
 	tar zcf ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04.tar.gz ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/
 
 build-ubuntu2204:
-	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04
+	mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04
 	PKG_REL_DISTRIB=ubuntu22.04; \
 	(set -x; \
 	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
@@ -83,8 +62,8 @@ build-ubuntu2204:
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg PKG_REL_DISTRIB=ubuntu22.04 \
 		-t luajit-ubuntu2204 . \
-	) 2>&1 | sudo tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
-	sudo xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
+	) 2>&1 | tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log&& \
+	xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}ubuntu22.04/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
 
 run-ubuntu2204:
 	docker run --rm -it luajit-ubuntu2204 bash
@@ -96,7 +75,7 @@ deb-debian12: build-debian12
 	tar zcf ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12.tar.gz ./${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/
 
 build-debian12:
-	sudo mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12
+	mkdir -p ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12
 	PKG_REL_DISTRIB=debian12; \
 	(set -x; \
 	docker buildx build --load --progress=plain ${DOCKER_NO_CACHE} \
@@ -104,8 +83,8 @@ build-debian12:
 		--build-arg PKG_VERSION=${PKG_VERSION} \
 		--build-arg PKG_REL_DISTRIB=debian12 \
 		-t luajit-debian12 . \
-	) 2>&1 | sudo tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log && \
-	sudo xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
+	) 2>&1 | tee ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log && \
+	xz -9 --force ${PKG_ARCHIVE_NAME}-${PKG_VERSION}-${PKG_REL_PREFIX}debian12/luajit_${PKG_VERSION}-${PKG_REL_PREFIX}$${PKG_REL_DISTRIB}.build.log
 
 run-debian12:
 	docker run --rm -it luajit-debian12 bash
@@ -113,4 +92,4 @@ run-debian12:
 exec:
 	docker exec -it $$(docker ps -q) bash
 
-.PHONY: deb-debian12 run-debian12 build-debian12 deb-ubuntu2204 run-ubuntu2204 build-ubuntu2204 exec
+.PHONY: deb-ubuntu2604 run-ubuntu2604 build-ubuntu2604 deb-ubuntu2404 run-ubuntu2404 build-ubuntu2404 deb-ubuntu2204 run-ubuntu2204 build-ubuntu2204 deb-debian12 run-debian12 build-debian12 exec
